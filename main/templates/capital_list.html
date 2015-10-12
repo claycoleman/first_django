@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Capital List
+{% endblock title %}
+
+{% block body %}
+    
+    <div class="container">
+        <div class="row">
+            <div class="box"></div>
+        </div>
+        <div class="row">
+            <div class="box"></div>
+        </div>
+    </div>
+    <h1>Capital List</h1>
+    <p>
+        <a href="{% url 'city_search' %}">Cities Lists</a>
+        <a href="{% url 'state_list' %}">States list</a>
+    </p>
+    <h4>
+        {% for capital in capitals %}
+            <a href="{% url 'capital_detail' capital.pk %}">{{capital}}</a>, capital of {{capital.state}}<br>
+        {% endfor %}
+    </h4>
+
+
+{% endblock body %}
+
+

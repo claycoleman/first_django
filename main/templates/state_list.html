@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    State List
+{% endblock title %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="box" style="min-height: 163px;">
+            <div class="col-md-4">
+                 <form action="{% url 'state_list' %}" method="POST">
+                {% csrf_token %} 
+                {% if user.is_authenticated == False %}
+
+                    Username:
+                    <input name="username" type="username">
+                    <br>
+                    Password:
+                    <input name="password" type="password">
+                    <br>
+                    <input type="submit" value="log in">
+                {% else %}
+                    Current user: {{request.user}}<br>
+                    <a href="{% url 'logout' %}">Click here to log out!</a>
+
+                {% endif %}    <br>
+                </h4>
+        
+                </form>
+            </div>
+            <div class="col-md-4">
+                <h4 style="text-align: center">
+                    <form action="{% url 'state_list' %}">
+                    {{form.as_p}}
+                    </form>
+                </h4>
+            </div>
+            
+        </div>
+    </div>
+            
+    <div class="row">
+            <div class="box">
+                
+                    
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">State
+                        <strong>List</strong>
+                    </h2>
+                    <hr>
+                </div>
+                <div class="col-lg-12 text-center">
+                    {% for state in states %}
+                        <!--<img class="img-responsive img-border img-full" src="{% static 'img/flags/{{state.abbrev}}.png' %}" alt="">-->
+                    
+                    <h2 style="text-align: center"><a href="{% url 'state_detail' state.pk %}">{{state.name}}</a>
+                        <br>
+                        <small><a href="{% url 'capital_detail' state.statecapital.pk %}">{{state.statecapital}}</a></small>
+                    </h2>
+                    <a href="{% url 'state_detail' state.pk %}" class="btn btn-default btn-lg">More Details</a>
+                    <hr>
+                     {% endfor %}
+                </div>
+        </div>
+    </div> 
+</div>
+
+
+</br> 
+
+{% endblock body %}

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{city}} Details
+{% endblock title %}
+
+{% block body %}
+
+<br>
+<div class="container">
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Details of 
+                        <strong>{{city.city}}</strong>
+                    </h2>
+                    <hr>
+                </div>
+                <div class="col-md-8">
+                    <div id="map" style="min-width:100%; min-height:400px;">
+                        
+                    </div>
+
+                    <!-- Embedded Google Map using an iframe - to select your location find it on Google maps and paste the link as the iframe src. If you want to use the Google Maps API instead then have at it! -->
+                    <!-- <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?hl=en&amp;ie=UTF8&amp;q={{state.statecapital.name}},{{state}}&amp;ll={{state.statecapital.lat}},{{state.statecapital.lon}}&amp;spn=56.506174,79.013672&amp;t=m&amp;z=5&amp;output=embed"></iframe> -->
+                </div>
+                <div class="col-md-4">
+                    <p>State:
+                        <strong><a href="{% url 'state_detail' city.state.pk %}">{{city.state}}</a></strong>
+                    </p>
+                    <p>County:
+                        <strong>{{city.county}}
+                        </strong>
+                    </p>
+                    <p>Zip Code:
+                        <strong>{{city.zip_code}}
+                        </strong>
+                    </p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+    <div class="row">
+        <div class="box">
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'city_edit' city.pk %}">Update this city</a>
+            <br>
+            <a href="{% url 'city_delete' city.pk %}">Delete this city!</a>''
+            <br>
+            {% endif %}
+            <br>
+            <a href="{% url 'city_search' %}" class="btn btn-default btn-lg">Back to list</a>
+        </div>
+    </div>
+</div>
+    
+
+
+
+
+<script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
+
+    <script type="text/javascript">
+    var map;
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: {{city.lat}}, lng:{{city.lon}}},
+            zoom: 6
+            });
+
+        var markerPos = new google.maps.LatLng({{city.lat}},{{city.lon}});
+        var marker = new google.maps.Marker({position:markerPos,
+               map:map, 
+               title:"{{city.city}}"});
+        var infoWindow = new google.maps.InfoWindow({
+                content: "{{city.city}}: {{city.zip_code}}"
+        });
+        marker.addListener('click', function() {
+            infoWindow.open(map, marker)
+        });
+    }
+    </script>
+{% endblock body %}

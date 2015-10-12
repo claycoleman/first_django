@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}
+    Delete {{state}}
+{% endblock title %}
+
+{% block body %}
+    <h1>Deleting {{state}}</h1>
+    <h2>But {{state}}'s a great state!! And it's illegal to exit the Union anyways, right..?</h2>
+    <form action="{% url 'state_delete' state.pk %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Confirm">
+    </form>
+
+    <h4><a href="{% url 'state_detail' state.pk %}">Back to state detail</a></h4>
+
+
+{% endblock body %}

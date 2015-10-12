@@ -1,0 +1,29 @@
+<head>
+    <title>State Search</title>
+</head>
+
+<h2>Search the States!</h2>
+
+<pre>
+    Get: {{request.GET}}
+    <br>
+    Post: {{request.POST}}
+    <br>
+    {{request.META}}
+    <br>
+
+<span>Search: </span>
+{# POST is for sensitive data #}
+{# <form action="/state_search/" method='POST'> #}
+<form action"{% url 'state_search' %}">
+    {# {% csrf_token %} only necessary for POST #}
+    <input name="search" type="text">
+    
+</form>
+
+
+    {% for state in states %}
+        <a href="{% url 'state_detail' state.pk %}">{{state}}</a> 
+    {% endfor %}
+
+</pre>

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Delete {{city}}
+{% endblock title %}
+
+{% block body %}
+    <h1>Deleting {{city}}</h1>
+    <h2>Are you sure that you want to delete this area from the database?</h2>
+    <form action="{% url 'city_delete' city.pk %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Confirm">
+    </form>
+
+
+
+{% endblock body %}

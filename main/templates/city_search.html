@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block title %}
+    City Search
+{% endblock  %}
+
+{% block body %}
+<div class="container">
+        <div class="row">
+            <div class="box" style="min-height: 120px">
+                <div class="col-md-4">
+                    <!--<span>Search: </span>
+                <form action="{% url 'city_search' %}">
+                    <input name="search" type="text">
+                </form>-->
+                    {% crispy form %}
+                </div>
+                <div class="col-md-2">
+                   
+                </div>
+                <div class="col-md-4">
+                    {% if request.user.is_authenticated %}
+                         <a href="{% url 'city_create' %}" class="btn-primary">Create a new city!</a>
+                    {% endif %}
+                </div>
+                
+               
+            </div>
+        </div>
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Search 
+                        <strong>American Cities</strong>
+                    </h2>
+                    <hr>
+                </div>
+                <div class="col-lg-12 text-center">
+                    {% for state in states %}
+                        <!--<img class="img-responsive img-border img-full" src="{% static 'img/flags/{{state.abbrev}}.png' %}" alt="">-->
+                            <h2>{{state.name}}
+                            <br>
+                             <small>{{state.statecapital}}</small>
+                        </h2>
+                        <p>
+                        {% if search != "" and search != None %}
+                        
+                        
+                                 -- {% for city in state.area_set.all %}
+                            
+                                    {% if search|lower in city.city|lower %}
+                                            <a href="{% url 'city_detail' city.pk %}">{{city}}</a> -- 
+                                    {% endif %}
+                       
+                                    {% endfor %}
+                         {% else %}
+                            {% for city in state.area_set.all|slice:":15" %}
+                                <a href="{% url 'city_detail' city.pk %}">{{city}}</a> -- 
+                            {% endfor %}
+
+                        {% endif %}
+                        </p> 
+                        <a href="{% url 'state_detail' state.pk %}" class="btn btn-default btn-lg">More Details</a>
+                         <hr>
+
+                        {% endfor %}
+                         </div>
+        </div>
+
+    </div>
+
+    
+{% endblock body %}

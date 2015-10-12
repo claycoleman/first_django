@@ -1,0 +1,20 @@
+<head>
+    <title>Create a City</title>
+</head>
+
+<h2>Creating a City in the database</h2>
+{{ method }}
+<form action="{% url 'city_create' %}" method="POST">
+    {% csrf_token %} 
+    City name: <input type="text" value="{{city.city}}" name="city"> <br>
+    County <input type="text" value="{{city.county}}" name="county"> <br>
+    Lat<input type="number" value="{{city.lat}}" name="lat"> <br>
+    Lon <input type="number" value="{{city.lon}}" name="lon"> <br>
+    Zip <input type="text" value="{{city.zip_code}}" name="zip_code"> <br>
+    <input type="hidden" value="{{city.pk}}" name="pk"> <br>
+    {{form.state}}
+    
+
+    <input type="submit" value="create">
+</form>
+{{ created }}
