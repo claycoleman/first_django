@@ -5,8 +5,14 @@ from django.db import models
 
 class State(models.Model):
     name = models.CharField(max_length=255)
-    abbrev = models.CharField(max_length=255, null=True, blank=True)   
-
+    abbrev = models.CharField(max_length=255, null=True, blank=True)  
+    population = models.CharField(max_length=255, null=True, blank=True) 
+    state_map = models.ImageField(upload_to='state_map', null=True, blank=True)
+    date_admitted = models.CharField(max_length=255, null=True, blank=True)
+    rank_admitted = models.CharField(max_length=50, null=True, blank=True)
+    nickname = models.CharField(max_length=255, null=True, blank=True)
+    flag = models.ImageField(upload_to='state_flag', null=True, blank=True)
+    seal = models.ImageField(upload_to='state_seal', null=True, blank=True)
     class Meta:
         ordering = ['name']
         

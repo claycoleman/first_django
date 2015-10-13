@@ -24,9 +24,10 @@ csv_file = open(states_csv, 'r')
 
 reader = csv.DictReader(csv_file)
 print reader
-Area.objects.all().delete()
+# Area.objects.all().delete()
 for row in reader:
     new_area, created = Area.objects.get_or_create(zip_code=row['zip_code'])
+
     print new_area.zip_code
     new_area.lat = row['latitude']
     new_area.lon = row['longitude']
