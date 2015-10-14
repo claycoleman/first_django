@@ -75,12 +75,12 @@ for link in links:
         # cleaned_rank = re.search(state_rank_pattern, '%s' % state_rank_string).group()
         # state.rank_admitted = cleaned_rank
 
-        # url = 'http://www.50states.com/images/redesign/flags/%s-largeflag.png' % state.abbrev.lower()
-        # print url
+        url = 'http://www.50states.com/images/redesign/flags/%s-largeflag.png' % state.abbrev.lower()
+        print url
 
-        state_flag_xpath = '//*[@id="content"]/div[1]/div[3]/div/a[2]/div/div/div[1]/img/@src'
-        state_flag_image = tree.xpath(state_flag_xpath)[0]
-        url = "http://www.50states.com/%s" % state_flag_image
+        # state_flag_xpath = '//*[@id="content"]/div[1]/div[3]/div/a[2]/div/div/div[1]/img/@src'
+        # state_flag_image = tree.xpath(state_flag_xpath)[0]
+        # url = "http://www.50states.com/%s" % state_flag_image
 
         image_response = urllib2.urlopen(url).read()
         
@@ -90,18 +90,18 @@ for link in links:
         state.flag.save('flag_img.png', File(temp_image))
 
 
-        state_seal_xpath = '//*[@id="content"]/div[1]/div[3]/div/a[3]/div/div/div[1]/img/@src'
-        state_seal_image = tree.xpath(state_seal_xpath)[0]
-        url = "http://www.50states.com/%s" % state_seal_image
+        # state_seal_xpath = '//*[@id="content"]/div[1]/div[3]/div/a[3]/div/div/div[1]/img/@src'
+        # state_seal_image = tree.xpath(state_seal_xpath)[0]
+        # url = "http://www.50states.com/%s" % state_seal_image
 
-        image_response = urllib2.urlopen(url).read()
+        # image_response = urllib2.urlopen(url).read()
         
-        temp_image = NamedTemporaryFile(delete=True)
-        temp_image.write(image_response)
+        # temp_image = NamedTemporaryFile(delete=True)
+        # temp_image.write(image_response)
 
-        state.seal.save('seal_img.png', File(temp_image))
+        # state.seal.save('seal_img.png', File(temp_image))
 
-        state_population_xpath = '//*[@id="collapseQuick-Facts"]/div/ul/li[6]/div/text()'
+        # state_population_xpath = '//*[@id="collapseQuick-Facts"]/div/ul/li[6]/div/text()'
 
         # if (link.startswith('/colorado') or link.startswith('/delaware')):
         #     state_population_xpath = '//*[@id="collapseQuick-Facts"]/div/ul/li[5]/div/text()'
@@ -121,25 +121,25 @@ for link in links:
 
 
 
-        state_map_link_xpath = '//*[@id="collapseGovernment"]/div/ul/li[2]/div/a/@href'
+        # state_map_link_xpath = '//*[@id="collapseGovernment"]/div/ul/li[2]/div/a/@href'
 
-        state_map_link = tree.xpath(state_map_link_xpath)[0]
-        state_map_page = urllib.urlopen(state_map_link)
-        state_map_html = state_map_page.read()
-        tree = etree.parse(StringIO.StringIO(state_map_html), parser)
+        # state_map_link = tree.xpath(state_map_link_xpath)[0]
+        # state_map_page = urllib.urlopen(state_map_link)
+        # state_map_html = state_map_page.read()
+        # tree = etree.parse(StringIO.StringIO(state_map_html), parser)
 
-        image_link_xpath = '//*[@id="innerPage"]/img/@src'
-        state_map_image = tree.xpath(image_link_xpath)[0]
-        url = "http://quickfacts.census.gov/%s" % state_map_image
-        image_response = urllib2.urlopen(url).read()
+        # image_link_xpath = '//*[@id="innerPage"]/img/@src'
+        # state_map_image = tree.xpath(image_link_xpath)[0]
+        # url = "http://quickfacts.census.gov/%s" % state_map_image
+        # image_response = urllib2.urlopen(url).read()
         
-        temp_image = NamedTemporaryFile(delete=True)
-        temp_image.write(image_response)
+        # temp_image = NamedTemporaryFile(delete=True)
+        # temp_image.write(image_response)
 
-        state.state_map.save('map_img.gif', File(temp_image))
+        # state.state_map.save('map_img.gif', File(temp_image))
 
 
 
-        state.save()
+        # state.save()
 # //*[@id="content"]/div[1]/div[2]/div/div[1]/h1
 # //*[@id="content"]/div[1]/div[2]/div/div[1]/h1
