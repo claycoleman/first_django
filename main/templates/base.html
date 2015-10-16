@@ -19,6 +19,7 @@
 
     <!-- Custom CSS -->
     <link href="{% static 'css/business-casual.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/state_list.css' %}">
 
     <!-- Fonts -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
@@ -35,8 +36,8 @@
 
 <body>
 
-    <div class="brand">Django States!</div>
-    <div class="address-bar">Django's first project | CodingCampus, Provo UT | October </div>
+    <div class="brand"><a href="{% url 'home' %}" id="brand_name">Django States</a></div>
+    <div class="address-bar">coleclayman's first project | CodingCampus, Provo UT | October </div>
 
     <!-- Navigation -->
     <nav class="navbar navbar-default" role="navigation">
@@ -50,11 +51,11 @@
                     <span class="icon-bar"></span>
                 </button>
                 <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
-                <a class="navbar-brand" href="index.html">Business Casual</a>
+                <a class="navbar-brand" href="index.html">Django States</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav" style="text-align: center">
                     <li>
                         <a href="{% url 'state_list' %}">States List</a>
                     </li>
@@ -82,7 +83,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <p>Copyright &copy; States! 2015</p>
+                    <p>Copyright &copy; States 2015</p>
                 </div>
             </div>
         </div>

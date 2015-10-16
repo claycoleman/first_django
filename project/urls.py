@@ -23,8 +23,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^nimda/', include(admin.site.urls)),
     # url(pattern, view)
-    url(r'^home/$', 'main.views.state_list', name="state_list"),
-    url(r'^$', 'main.views.state_list', name="home"),
+    url(r'^state_list/$', 'main.views.state_list', name="state_list"),
+    url(r'^$', 'main.views.home', name="home"),
 
     url(r'^state_detail/(?P<pk>\d+)/$', 'main.views.state_detail', name='state_detail'),
     url(r'^city_list/$', 'main.views.city_search', name='city_search'),

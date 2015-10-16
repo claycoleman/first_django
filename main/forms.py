@@ -5,7 +5,8 @@ from crispy_forms.layout import Submit, HTML, Layout, Div
 from crispy_forms.bootstrap import FormActions
 
 class Search(forms.Form):
-    search = forms.CharField(required = False, label='Search by State')
+
+    search = forms.CharField(required=False, label='')
 
 
 class CityDetails(forms.Form):

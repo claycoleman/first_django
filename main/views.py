@@ -14,7 +14,10 @@ from django.core.mail import send_mail
 # delete view
 # make the view --> make the URL
 
+def home(request):
+    context = {}
 
+    return render_to_response('home.html', context, context_instance=RequestContext(request))
 
 
 
@@ -24,7 +27,7 @@ def state_list(request):
     context['request'] = request
     temp = request.user
     context['user'] = temp
-    form = Search(request.GET)
+    form = Search(request.GET, "by State")
     context['form'] = form
     context['states'] = State.objects.all().order_by('name')
     print context['states']

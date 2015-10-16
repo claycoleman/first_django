@@ -1,0 +1,6 @@
+#brand_name {
+    color: white;
+}
+#brand_name:hover {
+    text-decoration: none; color: lightgray;
+}
