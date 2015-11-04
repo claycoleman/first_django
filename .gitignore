@@ -1,4 +1,4 @@
 *.pyc
 media/
 main/migrations/
-main/.DS_Store
+.DS_Store
