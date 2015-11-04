@@ -2,6 +2,7 @@ from django.shortcuts import render, render_to_response, redirect
 from django.conf import settings
 from main.models import State, StateCapital, Area
 from django.template import RequestContext
+from django.http import JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from forms import Search, CityDetails, ContactForm, AreaEditForm
 from django.core.mail import send_mail
@@ -49,16 +50,7 @@ def state_list(request):
             # the authentication system was unable to verify the username and password
             print("The username and password were incorrect.")
            
-    elif request.method == "GET":
-        if form.is_valid():
-            context['results'] = ""
-            search = form.cleaned_data['search']
-            states = State.objects.all().order_by('name')
-            if search is not None:
-                states = State.objects.filter(name__istartswith=search).order_by('name')
-                if len(states) is 0:
-                    context['results'] = "No results found..."
-            context['states'] = states
+    
         
 
 
@@ -277,3 +269,20 @@ def city_edit(request, pk):
         return redirect('city_detail', city.pk)
 
     return render_to_response('city_edit.html', context, context_instance=RequestContext(request))
+
+def searcher(request):
+    search = request.GET.get('search', '')
+
+    obj_qs = State.objects.filter(name__icontains=search)
+
+    obj_list = [{'name': obj.name, 'state_pk': obj.pk, 'capital': obj.statecapital.name, 'cap_pk': obj.statecapital.pk} for obj in obj_qs]
+
+    return JsonResponse(obj_list, safe=False)
+
+
+
+
+
+
+
+

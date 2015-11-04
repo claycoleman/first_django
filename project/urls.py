@@ -38,4 +38,5 @@ urlpatterns = [
     url(r'^state_delete/(?P<pk>\d+)/$', 'main.views.state_delete', name='state_delete'),
     url(r'^contact_view/$', 'main.views.contact_view', name='contact_view'),
     url(r'^city_edit/(?P<pk>\d+)/$', 'main.views.city_edit', name='city_edit'),
+    url(r'^searcher/$', 'main.views.searcher', name='searcher'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

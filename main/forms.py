@@ -6,7 +6,7 @@ from crispy_forms.bootstrap import FormActions
 
 class Search(forms.Form):
 
-    search = forms.CharField(required=False, label='')
+    search = forms.CharField(required=False, label='', widget=forms.TextInput(attrs={'id': 'search'}))
 
 
 class CityDetails(forms.Form):
