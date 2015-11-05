@@ -2,3 +2,5 @@
 media/
 main/migrations/
 .DS_Store
+local.py
+
