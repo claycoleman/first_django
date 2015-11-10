@@ -37,7 +37,7 @@ class Area(models.Model):
     zip_code = models.CharField(max_length=255, null=True,blank=True)
     lat = models.CharField(max_length=255, null=True, blank=True)
     lon = models.CharField(max_length=255, null=True, blank=True)
-    city = models.CharField(max_length=255, null=True, blank=True)
+    city = models.CharField(max_length=255, null=True, blank=True, db_index=True)
     county = models.CharField(max_length=255, null=True, blank=True)
     state_abbrev = models.CharField(max_length=50, null=True, blank=True)
     state = models.ForeignKey('State', null=True, blank=True)

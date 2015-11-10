@@ -52,6 +52,16 @@
                     <hr>
                 </div>
                 <div class="col-lg-12 text-center" id="thestates">
+                    {% for state in states %}
+                        <!--<img class="img-responsive img-border img-full" src="{% static 'img/flags/{{state.abbrev}}.png' %}" alt="">-->
+                    
+                    <h2 style="text-align: center"><a href="{% url 'state_detail' state.pk %}">{{state.name}}</a>
+                        <br>
+                        <small><a href="{% url 'capital_detail' state.statecapital.pk %}">{{state.statecapital}}</a></small>
+                    </h2>
+                    <a href="{% url 'state_detail' state.pk %}" class="btn btn-default btn-lg">More Details</a>
+                    <hr>
+                     {% endfor %}
                 </div>
         </div>
     </div> 
@@ -59,53 +69,5 @@
 
 
 </br> 
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
-
-{% verbatim %}
-<script type="text/x-handlebars-template" id="state-template">
-    {{#each states}}
-    <h2 style="text-align: center"><a href="/state_detail/{{pk}}/">{{name}}</a>
-    <br>
-    <small><a href="/capital_detail/{{statecapital_pk}}">{{statecapital}}</a></small>
-    </h2>
-    <a href="/state_detail/{{pk}}/" class="btn btn-default btn-lg">More Details</a>
-    <hr>
-    {{/each}}
-</script>
-{% endverbatim %}
-
-<script type="text/javascript">
-    
-$(function() {
-    var stateList = $('#thestates');
-
-    var rawTemplate = $('#state-template').html();
-
-    var template = Handlebars.compile(rawTemplate);
-
-    $.ajax({
-        type: 'GET',
-        url: '/api_state/list/',
-        data: {},
-        success: function(data) {
-            html_template = template(data);
-            stateList.html(html_template);
-            // for (key in data) {
-            //     console.log(data[key]);
-            //     for (i=0; i < data[key].length; i++) {
-            //         $('#state_list').append('<li>' + data[key][i]['name'] + '</li>');
-            //     }
-            // }
-
-        }
-    });
-
-
-});
-
-
-</script>
 
 {% endblock body %}

@@ -20,3 +20,7 @@ $('#search').on('keyup', function(e) {
 
     });
 });
+
+// $('#state_list').on('click', function(event) {
+//     $('#state_list').append('<li>extra element</li>');
+// });

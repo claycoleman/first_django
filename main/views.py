@@ -20,7 +20,45 @@ def home(request):
 
     return render_to_response('home.html', context, context_instance=RequestContext(request))
 
+def api_state_list(request):
 
+    states = State.objects.all()
+    state_list = []
+    api_dict = {}
+    api_dict['states'] = state_list
+    for state in states:
+        state_list.append({'name': state.name, 'abbrev': state.abbrev, 'pk': state.pk, 'statecapital':state.statecapital.name, 'statecapital_pk':state.statecapital.pk})
+    return JsonResponse(api_dict, safe=False)
+
+def api_state_detail(request):
+    name = request.GET.get('name')
+    state = State.objects.get(name__iexact=name)
+    return JsonResponse({'name': state.name, 'abbrev': state.abbrev, 'map':state.state_map.url, 'flag':state.flag.url}, safe=False)
+
+def api_city_list(request):
+
+    areas = Area.objects.all()
+    area_list = []
+    api_dict = {}
+    api_dict['areas'] = area_list
+    for area in areas:
+        area_list.append({'city': area.city, 'county': area.county})
+    return JsonResponse(api_dict, safe=False)
+
+def ajax_state_list(request):
+    context = {}
+
+    return render_to_response('ajax_state_list.html', context, context_instance=RequestContext(request))
+
+def ajax_state_detail(request, slug):
+    context = {}
+    context['name'] = slug
+    return render_to_response('ajax_state_detail.html', context, context_instance=RequestContext(request))
+
+def ajax_city_list(request):
+    context = {}
+
+    return render_to_response('ajax_city_list.html', context, context_instance=RequestContext(request))
 
 def state_list(request):
 
